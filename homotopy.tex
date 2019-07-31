@@ -1,0 +1,387 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{amsthm}
+\usepackage{physics}
+\usepackage{relsize}
+\usepackage{graphicx}
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage[margin=0.5in]{geometry}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{cor}{Corollary}[section]
+\newtheorem{lem}{Lemma}[section]
+\newtheorem{prop}{Proposition}[section]
+\theoremstyle{definition}
+\newtheorem{ex}{Example}[section]
+\newtheorem{exmp}{Example}[section]
+\newtheorem{remark}{Remark}
+\newtheorem{defn}{Definition}[section]
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\cat}{\mathbf}
+\let\vec\mathbf
+\title{Homotopy Theory}
+\author{}
+\date{}
+
+\begin{document}
+\Large
+\maketitle
+\tableofcontents
+\newpage
+\section{Covering Spaces}
+\subsection{Locally Trivial Maps}
+ Let $p:E \rightarrow B$ be continuous and $U\subset B$ be open.
+\begin{defn} A \textbf{trivialization} of $p$ \textit{over} $U$ is a homeomorphism $$\phi:p^{-1}(U)\rightarrow U \times F$$ \textit{over} $U$, i.e.,  it satisfies pr$_1 \circ \phi = p$.
+\end{defn}
+\begin{remark}
+If $F$ is \textbf{discrete}, then we have a covering space. If $F$ is a \textbf{\textit{vector space}}, we have a vector bundle.
+\end{remark}
+\begin{defn} The map $p$ is \textbf{locally trivial} is there exists a open cover $\{U_{\alpha}\}_{\alpha\in I}$ of $B$ such that $p$ has a trivilization over each $U_\alpha\in \{ U_{\alpha}\}_{\alpha\in I}$\end{defn}
+\begin{remark}
+A locally trivial map is also called a \textbf{bundle} or \textbf{fibre bundle} and a local trivialization a \textbf{bundle chart}. 
+\end{remark}
+\begin{remark}
+If $p$ is locally trivial, the set of all $b\in B$ for which $p^{-1}(b)$ is homeomorphic to  F, is open and closed in $B$
+\end{remark}
+\begin{defn}
+If the fibers are homeomorphic to $F$, we call $F$ the \textbf{typical fiber}.
+\end{defn}
+\begin{defn}
+A \textbf{covering space} of $B$ is a locally trivial map $$p:E \rightarrow B$$ with dicrete fibers.
+\end{defn}
+\begin{exmp} If we take $p: \R \rightarrow S^1$ to be the map $$p(t)=e^{2\pi it}$$ Then $p$ is a covering for $S^1$. Indeed, if we let $U\subset S^1$ be a open set that is represented in the solid silver point in the white circle below, then we have the trivialization $$\phi : p^{-1}(U) \rightarrow U \times \Z$$ So $\Z$ is the typical fiber.
+
+%$$\begin{tikzpicture}
+%\begin{axis}[axis lines=none,unit vector ratio={1 1 1.2},width=10cm,
+%axis background/.style={
+%shade,top color=white,bottom color=black!80!gray,middle %color=gray},view={10}{40},xmax=1.5,xmin=-1.5,ymax=1.5,ymin=-1.5]
+%\addplot3+[gray,domain=0:6*pi,samples y=0,samples=200,no marks, smooth](
+%  {cos(deg(x))},
+ % {sin(deg(x))},
+ % {1+x/5}
+%) node[circle,inner sep=1pt,ball color=gray,pos=0.40]{};
+%\addplot3+[white,domain=0:2*pi,samples y=0,samples=100,no marks, %smooth](
+%  {cos(deg(x))},
+%  {sin(deg(x))},
+%  {0}
+%) node[circle,inner sep=1pt,ball color=gray,pos=0.2]{};
+%\end{axis}
+
+%\end{tikzpicture}$$
+
+\end{exmp}
+
+\begin{defn}
+Let $(G,*)$ be a group and $E$ be a set.  A \textbf{group action} is the map $\psi:G\times E \rightarrow E$, where $$\psi(g,x)=g \cdot x$$ such that $$g_1 \cdot (g_2 * x)=(g_1 \cdot g_2) * x$$  $$e\cdot x=x$$ In other words, it is associative and the identity acting on any element in $E$ give the same element back.
+\end{defn}
+\begin{defn}
+A group action  $G\times E \rightarrow E$ of a discrete group $G$ on $E$ is called \textbf{properly discontinuous} if for any $e\in E $ there exists a open neighborhood $U$ of $e$ such that $$U \cap gU=\emptyset$$ for $g=\not e$
+
+\end{defn}
+\begin{exmp}
+Let $(\Z,+)$ be a group and  $\psi: \Z\times \R \rightarrow \R$ be a group action defined as $$\psi(k,x)=k+x$$ Consider $k=2$ and $x=\pi$ and the open neighborhood $U=(\pi-\epsilon,\pi+\epsilon)$. Then we have $$U \cap kU=(\pi-\epsilon,\pi+\epsilon)\cap (\pi+2-\epsilon,\pi+2+\epsilon)=\emptyset$$ so $\psi$ is properly discontinuous. 
+\end{exmp}
+\begin{defn}
+A group action $\psi:G\times E \rightarrow E$ is \textbf{transitive} if for any $(x,y)\in G \times E$ there exists a $g\in G$ such that  $$x=g\cdot y$$
+\end{defn}
+\begin{defn}
+A \textbf{left $G$-principle covering} is the following data:
+\begin{enumerate}
+    \item $p: E \rightarrow B$ a covering
+    \item A properly discontinuous group action $\psi:G\times E \rightarrow E$ such that $$p(gx)=p(x)$$ for all $(g,x)\in G \times E$.
+    \item For any $x \in B$ and $a,b \in p^{-1}(\{x\})$, there exists a $g\in G$ such that $$a=g\cdot b$$ In other words the induced action on each fiber is \textit{transitive}.
+    \end{enumerate}
+\end{defn}
+\noindent This means that $G$ acts on $E$ nicley, i.e., $G$ preserves fibers. $G$ acts on fibers so there is an action $$\Phi: G \times p^{-1}(x)\rightarrow p^{-1}(x)$$ where the action is also transitive.  
+\begin{remark}
+If $G$ is an abelian group, then we have a local system. 
+\end{remark}
+\begin{exmp} Let $p: E \rightarrow B$ be a left $G$-principle covering. We show that this covering induces a homeomorphism of the orbit space $E/G$ with $B$ , i.e., $$E/G \cong B$$ Define the map $\Psi: E/G \rightarrow B$ as $$\Psi(\bar{a_k})= p(a_k)$$ Clearly this is surjective. Assume that $$\Psi(\bar{a_k})=\Psi(\bar{a_j})$$ then $p(a_k)=p(a_j)=b$ and $a_k, a_j\in p^{-1}(b)$. By transitivity there exists an $h\in G$ such that $a_j=ha_k$ so $$\bar{a_j}=\bar{a_k}$$ 
+\end{exmp}
+\begin{defn}
+Let $p: E \rightarrow B$ be a covering. A \textbf{deck transformation} of $p$ is a homeomorphism $\alpha: E \rightarrow E$ such that $$p \circ \alpha =p$$ that is $\alpha$ lifts $p$.
+\end{defn}
+\begin{remark}
+In some sense deck transformation are the symmetries of covering spaces.
+\end{remark}
+\begin{exmp}
+Consder the covering space $p:\R\rightarrow S^1$ given by $$p(t)=e^{2\pi i t}$$ then the deck transformations is the homeomorphims $T_n: \R\rightarrow \R$ given by $$T_n(t)=t +n$$ for $n\in \Z$
+\end{exmp}
+\begin{exmp}
+Let $p: E \rightarrow  B$ be a left $G$-principle covering, $E$ connected. Then for each $g \in G$ define the left translation $l_g: E \rightarrow E$ as $$l_g(t)=g\cdot t$$ Then $$p \circ l_g (t)=p(g \cdot t)=p(t) $$ so this is a deck transformation. Then we can define a the following homomorphism $l:G \rightarrow $Aut($p$) defined as follows $$l(g)=l_g$$ This is injective since, if $l(g)=l(h)$, then we have that for $t\in E$ , $g \cdot t=h \cdot t$, or $$t=g^{-1}h\cdot t$$ Let $U$ be a open neighborhood of $t$, then $$U \cap g^{-1}h U= \{t\}$$ and since the group action is properly discontinuous $g^{-1}h=e$, so $h=g$.\\  Furthermore $l$ is surjective since if $x \in E$  and since a automorphims $\alpha$ is determined by a value at singe point $x$, $\alpha(x)\in p^{-1}(p(x))$ and the group action is transitive  we have that for any $\beta \in Aut(p)$ there exists a $g\in G$ such that $$\alpha(x)=g \cdot \beta(x)=\l_g(\beta(x))$$ so its is surjective.  So the connected principle coverings are the connected coverings with the largest  automorphism group.
+\end{exmp}
+
+\begin{defn}
+The category $G$-SET has the following data:
+\begin{enumerate}
+    \item Objects are left $G$-sets, i.e., A set $X$ with a left $G$ action.
+    \item Morphisms are $G$-equivariant maps,($G$-maps for short), i.e. $f:X \rightarrow Y$, $X,Y$ $G$-sets, such that $$f(ax)=af(x)$$ $a\in G$, $x\in X$. 
+    \item Composition is composition of homomorphisms
+\end{enumerate}
+\end{defn}
+\begin{defn}
+The category COV$_B$ has the following data:
+\begin{enumerate}
+    \item Objects are covering spaces $p: E \rightarrow B$ over $B$.
+    \item Morphisms are maps of covering spaces, hence continuous functions $f: E_1 \rightarrow E_2$ such that the following diagram commutes: 
+    $$\begin{tikzcd}
+{} & B  \\
+    E_1 \arrow{ur}{p_1} \arrow{rr}{f} && E_2 \arrow{ul}{p_2}
+\end{tikzcd}$$
+\end{enumerate}
+\end{defn}
+\noindent We now construct the \textbf{associated coverings} functor: 
+\begin{lem}
+Let $p: E \rightarrow B$ be a right $G$-principle covering and $F$ be a set with a left $G$-action. There is a covering $E\times F\rightarrow B$.
+\end{lem}
+Let $p: E \rightarrow B$ be a right $G$-principle covering and $F$ be a set with a left $G$-action. Define $E \times_{G} F$ to be $$E \times_{G} F=E \times F / \sim$$ where $\sim$ is a equivalence relation defined as: $(x,f)\sim (xg^{-1},gf)$ for $x\in E,f\in F,g\in G$.  Then we can define a continuous map $p_F: E \times_{G} F \rightarrow B$ as $$p_F(\bar{(x,f)})=p(x)$$ Note that this is a covering since $p$ is a right $G$-principle covering, so there exists a homeomorphism $$\phi:p^{-1}(U)\rightarrow U \times F$$  
+
+\begin{remark}
+$E\times_{G}F$ is a kind of "tensor product", in that we take the product and allow elements of $G$ to pass back and forth "across" $\times$.
+\end{remark}
+
+
+\begin{lem}
+A $G$-equivariant map $\Psi: F_1 \rightarrow F_2 $ induces a map of coverings.
+\end{lem}
+Given a map between two $G$-sets, $\Psi: F_1 \rightarrow F_2 $, we can make a map of coverings id$\times_G \Psi:E \times_{G} F_1\rightarrow E \times_{G} F_2 $ defined as $$\text{id}\times_G\Psi (\bar{(x,f)})=\bar{(x,\Psi(f))}$$ It's easy to show the the map satisfies that a triangular diagram commutes.
+
+\noindent The above two lemmas assemble into a functor $$A(p): G\textbf{-SET} \rightarrow \textbf{COV}_B,$$ which sends a $G$-set $F$ to $E\times_{G}F$. The functor is \textit{associated} to $p$, which gives us a well defined target. 
+\begin{remark}
+If $A(p)$ is an equivalence of categories, then the $G$-principle covering $p: E \rightarrow B$ over a path connected space $B$ is called \textbf{universal}.
+\end{remark}
+
+\subsection{Fiber Transport}
+\begin{defn}
+A map $p: E \rightarrow B$ has the \textbf{homotopy lifting property (HLP)}  if for the space $X$ the following holds: For any  homotopy  $h: X \times I \rightarrow B$ and each map $a:X \rightarrow E$ such that $$p \circ a=h \circ i$$ where $i(x)=(x,0)$, there exists a homotopy $H: X \times I \rightarrow E$ such that $$p \circ H=h$$ $$H \circ i=a$$
+\end{defn}
+
+$$\begin{tikzcd}
+X\arrow{r}{a}\arrow[d,"i"']  &E \arrow{d}{p}\\
+X\times I \arrow{r}{h}\arrow[ur,"H",dotted] &B
+\end{tikzcd}$$
+
+
+
+
+\begin{exmp}
+Consider the projection map $p:B \times F \rightarrow B$, i.e., $$p((b,f))=b$$ and let $a(x)=(a_1(x),a_2(x))$. Now we construct $H$. From the condition $p \circ a =h \circ i$, we must have that $a_1(x)=h(x,0)$. So define $$H(x,t)= (h(x,t),a_2(x))$$ then we have 
+\[(p \circ H)(x,t)=p(h(x,t),a_2(x))\\ =h(x,t)$$ and $$(H \circ i)(x)=H((x,0))=(h(x,0),a_2(x))=a\]
+\end{exmp}
+
+\begin{remark}
+If a map $p:E\rightarrow B$ has the HLP for all spaces, it is called a \textit{fibration}.
+\end{remark}
+
+To proceed, we need to recall a definition. 
+\begin{defn}
+Let $X,Y\in\cat{Spaces}.$ Consider $\Pi(X,Y)$. Let $\alpha:U\rightarrow X$ and $\beta:Y\rightarrow V$. Composition with $\alpha$ and $\beta$ yield functors \[\beta_{\#}=\Pi_{\#}(\beta):\Pi(X,Y)\rightarrow\Pi(X,V).\] and 
+\[\alpha^{\#}=\Pi^{\#}(\alpha):\Pi(X,Y)\rightarrow\Pi(U,Y)\] where $f\mapsto \beta f$ and $[K]\mapsto[\beta K]$ in the first place, and $f\mapsto f\alpha$ and $[K]\mapsto[K(\alpha\times \text{id})]$ in the second case. 
+\end{defn}
+
+Let $P:E\rightarrow B$ be a covering with the HLP for $I$ and a point. We define the \textbf{transport} functor \[T_{p}:\Pi(B)\rightarrow\text{SET} \] where $b\mapsto\pi_{0}(F_{b})$ and $[v]\mapsto v_{\#}$. We associate to each path $v:I\rightarrow B$ from $b$ to $c$ the map $v_{\#}$ in the following way: Let $x\in F_{b}$. We pick a lifting $V:I\rightarrow E$ of $v$ with $V(0)=x$. Set $v_{\#}[x]=[V(1)].$ This functor provides us with a right group action \[\pi_{0}(F_{b})\times\pi_{1}(B,b)\rightarrow\pi_{0}(F_{b}),\] defined as $(x,[v])\mapsto v_{\#}(x).$
+
+There is a left action of $\pi_{b}=\Pi(B)(b,b)$ on $F_{b}$ given by $(a,x)\mapsto a_{\#}(x)$ which commutes with the right action of $G$. We say $F_{b}$ is a $(\pi_{b},G)$-set. Fix $x\in F_{b}$. For each $a\in\pi_{b}$, there exists a unique $\gamma_{x}(a)\in G$ such that $a\cdot x=x\cdot\gamma_{x}(a)$ since the action of $G$ is free and transitive. The assignment $a\mapsto\gamma_{x}(a)$ is a homomorphism $\gamma_{x}:\pi_{b}\rightarrow G$. Since $\pi_{1}(B,b)$ is the opposite group to $\pi_{b}$, we set $\delta_{x}(a)=\gamma_{x}(a)^{-1}$. Then $\delta_{x}:\pi_{1}(B,b)\rightarrow G$ is a group homomorphism. 
+
+We now reach the whole point of this:
+\begin{theorem}
+Let $p:E\rightarrow B$ be a right principle$-G$ covering with a path connected total space. Then the following sequence is exact:
+\[1\rightarrow\pi_{1}(E,x)\xrightarrow{p_{*}}\pi_{1}(B,p(x))\xrightarrow{\delta_{x}}G\rightarrow 1. \]
+\end{theorem}
+\begin{cor}
+$E$ is simply connected iff $\delta_{x}$ is an isomorphism. I.e., if $E$ is simply connected, $G$ is isomorphic to the fundamental group of $B$.
+\end{cor}
+
+We now come to the \textit{point} of this chapter.
+\subsection{Classification of Coverings}
+\subsection{Coverings of Simplicial Sets}
+
+\section{Elementary Homotopy Theory}
+\subsection{Mapping Cylinder}
+We first recall the definition of homotopy.
+\begin{defn}[Homotopy]
+Let $X,Y\in\cat{Top}$ and $f,g:X\rightarrow Y$ be continuous maps. A \textbf{homotopy} from $f$ to $g$ is a continuous map
+\[H:X\times I\rightarrow Y,\] $(x,t)\rightarrow H(x,t)=H_{t}(x)$ such that $f(x)=H(x,0)$ and $g(x)=H(x,1)$ for $x\in X$. I.e., $H_{0}=f,H_{1}=g.$
+\end{defn}
+We denote a homotopy from $f$ to $g$ as $H:f\simeq g.$ A homotopy $H_{t}:X\rightarrow Y$ is said to be relative to $A$ if $H_{t}|_{A}$ does not depend on $t$. I.e., $H_{t}$ is constant on $A$. A space $X$ is \textbf{contractible} if it is homotopy equivalent to a point. A map $f:X\rightarrow Y$ is \textbf{null-homotopic} if it is homotopic to a constant map. 
+\begin{defn}[Topological Sum]
+Let $X,Y\in\cat{Top}$. We define the \textit{topological sum} $X+Y$ as the disjoint union $X\sqcup Y$ with the topology defined as the topology generated by $X$ and $Y$.
+\end{defn}
+Let $f:X\rightarrow Y$ be a continuous function. We now construct the \textbf{mapping cylinder} $Z(f)$ of $f$ as the pushout:
+
+\[
+\begin{tikzcd}
+&X+X \arrow[r,"\text{id}+f"] \arrow[d,"\langle{i_{0},i_{1}}\rangle"'] &X+Y\arrow[d,"\langle{j,\mathbf{J}}\rangle"]\\
+&X\times I\arrow[r,"a"] &Z(f)\\
+\end{tikzcd}
+,\]
+where $Z(f)=X\times I+Y/(f(x)\sim(x,1))$, $J(y)=y$, $j(x)=(x,0)$, and $i_{t}(x)=(x,t).$ From the construction, we have the projection $q:Z(f)\rightarrow Y$, where $(x,t)\rightarrow f(x)$ and $y\mapsto y$. We thus have the relations $qj=f$ and $qJ=\text{id}$. The map $Jq$ is homotopic to the identity relative to $Y$, where the homotopy is given by the identity on $Y$ and contracts $I$ to 1 relative to 1. We thus have a decomposition of $f$ into a closed embedding $J$ and a homotopy equivalence $q$.
+
+Via the universal properties of pushouts, we have that continuous maps $\beta:Z(f)\rightarrow B$ correspond bijectively to pairs $h:X\times I\rightarrow B$ and $\alpha:Y\rightarrow B$ such that $h(x,1)=\alpha f(x).$
+
+We now consider \textit{homotopy} commutative diagrams of the form
+\[
+\begin{tikzcd}
+&X\arrow[r,"f"]\arrow[d,"\alpha"]  &Y\arrow[d,"\beta"]\\
+&X'\arrow[r,"f'"] &Y'
+\end{tikzcd}
+\]
+together with homotopies $\Phi:f'\alpha\simeq\beta f.$ When the digram is strictly commutative, it depicts a morphism in the category of arrows in $\cat{Top}$. We can thus consider the data $(\alpha,\beta,\Phi)$ as a kind of "generalized" morphism. 
+
+These data induce a map $\chi=Z(\alpha,\beta,\Phi):Z(f)\rightarrow Z(f')$ defined by $\chi(y)=\beta(y),y\in Y$ and
+\[
+\chi(x,s)=
+\begin{cases}
+(\alpha(x),2s), &x\in X,s\leq1/2\\
+\Phi_{2s-1}(x), &x\in X,s\geq 1/2.
+\end{cases}
+\]
+We thus have the following diagram commutes:
+\[
+\begin{tikzcd}
+X+Y\arrow[r]\arrow[d,"\alpha+\beta"] &Z(f)\arrow[d,"Z\left({\alpha,\beta,\Phi}\right)"]\\
+X'+Y'\arrow[r] &Z(f')
+\end{tikzcd}
+\]
+The composition of two such morphisms is homotopic to a morphism of the same type. 
+
+\subsection{Suspension} We will start of with some basic definitions. Let $X\in \cat{Top}$ and $x_0\in X$. \begin{defn}
+We call the pair $(X,x_0)$ a \textbf{pointed space} with base point $x_0\in X$. A \textbf{pointed map} $f:(X,x_0)\rightarrow (Y,y_0)$ is a continous map $f:X \rightarrow Y$ that sends the base point of one space to the other ($x_0 \mapsto y_0$).
+\end{defn} 
+\begin{defn}
+A homotopy $H:X\times I \rightarrow Y$ is pointed if $H_t$ is pointed for each $t\in I$.
+\end{defn}
+Let $\cat{Top}^{0}$ denote the category of pointed topological spaces. 
+\begin{defn} Let $(X,x)\in\cat{Top}^{0}$. The \textbf{suspension} of $(X,x)$ is the space \[\Sigma X:=X\times I/(X\times\partial I\cup\{x\}\times I).\] The basepoint of $\Sigma X$ is the space we identified to a point. 
+\end{defn}
+\begin{remark}
+The definition we use here is often referred to as \textbf{reduced suspension}. Reduced suspension can be used to construct a homomorphism of homotopy groups, to which a very important theorem (\textit{Freudenthal Suspension Theorem}) can be applied. This gives you a shot at determining the higher homotopy groups of spaces, including the all-important spheres.
+\end{remark}
+\begin{ex}
+Consider $X=S^1$ and $I=(0,1)$. Then the space $X\times\partial I\cup\{x_0\}\times I$ becomes the green and orange parts of the beautifully created godly figure below:
+%\begin{center}
+%\includegraphics[width=0.4\textwidth]{Cylinder.jpg}
+%\end{center}
+Further we can see that the suspension $\Sigma X$ becomes a sphere.
+\end{ex}
+No we prove a useful proposition:
+\begin{theorem}
+$K:(X,x_{0})\times I\rightarrow (Y,y_{0})$ is a pointed homotopy from $k_{y_{0}}$ to itself if and only if it maps $X\times\partial I\cup\{x\}\times I$ to the base point $y_{0}.$
+\end{theorem}
+\begin{proof}
+$\Rightarrow$: Suppose that $K:(X,x_{0})\times I\rightarrow (Y,y_{0})$ is a pointed homotopy from $k_{y_{0}}$ to itself, i.e., $K(x,0)=k_{y_0}(x)=y_{y_0}$, $K(x,1)=k_{y_0}(x)=y_{y_0}$ and $K_t(x_0)=y_0$ for all $t\in I$.  
+\end{proof}
+Suppose we have a map of pointed spaces $f:(I,\partial I)\rightarrow (Y,y_{0})$. Suppose there were a homotopy from $f$ to the constant map $k_{y_{0}}$. This would then be given by a map $H:(I,\partial I)\times I$ such that $H(-,0)=f,H(-,1)=k_{y_{0}}$ and $H|_{\partial I\times I}=k_{y_{0}}.$ We thus have that a map $K:(X,x_{0})\times I\rightarrow (Y,y_{0})$ is a pointed homotopy from $k_{y_{0}}$ to itself if and only if $(X\times\partial I\cup\{x\}\times I)$ is mapped to $y_{0}.$
+\begin{defn}
+Let $f$, $g: X \rightarrow Y$ be continuous maps and $K$ is a subset of $X$, then we say that $f$ and $g$ are \textbf{homotopic relative to $K$} if there exists a homotopy $H: X\times I \rightarrow Y$ between $f$ and $g$ such that $H(k,t)=f(k)=h(k)$ for $k\in K$ and $t\in I$. 
+\end{defn}
+Now we can construct a group structure as follows: For a homotopy map $K:X\times I\rightarrow Y$ there is a pointed map $\bar{K}:(\Sigma X, X\times\partial I\cup\{x\}\times I)\rightarrow (Y,y_{0})$, and homtopies relative to $X \times \partial I$ corresponds to pointed homptopies $\Sigma X \rightarrow Y$. Then homotopy set $[\Sigma X, Y]^0:=\{[f]|f: \Sigma X \rightarrow Y \,\, \text{pointed maps} \}$ has a group structure with the binary operation (written additively ) being $[f]+[g]=[f+g]$ where $$(f+g)(x,t)= \begin{cases} 
+      f(x,2t) & t\leq \frac{1}{2} \\
+      g(x,2t-1) & \frac{1}{2}\leq t \\
+   \end{cases}$$
+   The identity is the homotopy class of the constant map to $x_0$, the inverse of $[f(x,t)]$ is the homotopy class containing the function $-f(x,t)=f(x,1-t)$. The associativity
+of this operation is given by the straight line homotopy $H$ described in the picture below: \begin{center}
+%\includegraphics[width=0.4\textwidth]{asso.JPG}
+\end{center}If $f:X \rightarrow Y$ is a pointed map, then $f \times$ id$(I)$ induces a map  $$\Sigma f: \Sigma X \rightarrow \Sigma Y $$ by mapping $(x,t)\mapsto (f(x),t)$. With this we can define the funtor $\Sigma : \cat{Top}^0 \rightarrow \cat{Top}^0$ which induces a functor for pointed homotopies.  
+   \begin{defn}
+   The \textbf{smash product} between two pointed spaces $(A,a)$ and $(B,b)$ is defined as $$A \wedge B:= A\times B / A \times b \cup a \times B=A\times B / A \lor B$$
+   \end{defn}
+  \begin{defn}
+   Let $(X,x)\in\cat{Top}^{0}$. The \textbf{$k$-fold suspension} of $(X,x)$ is the space \[\Sigma^k X:=X\wedge  (I^k/\partial I^k).\]
+  \end{defn}
+  \begin{remark}
+  This definition of the $k$-fold suspension is somehow canonically homeomorphic to $X\times I^n/(X\times\partial I^n\cup\{x\}\times \partial I^n)$
+  \end{remark}
+  So just like before we can construct  $k$ group structures as follows: We define  $k$ binary operation ($+_i$) on the homotopy set $[\Sigma^k X, Y]^0$, which depends on the $I$-coordinates, as follows:$$(f+_i g)(x,t)= \begin{cases} 
+      f(x,t_1, ..., t_{i-1},2t_i, t_{i+1},..) & t_i\leq \frac{1}{2} \\
+      g(x,t_1, ..., t_{i-1},2t_1-1, t_{i+1},...) & \frac{1}{2}\leq t_i \\
+   \end{cases}$$
+   We now show that all the group structures coincide and are abelian for $n\geq 2$. First we prove the commutation rule for $n=2$, which can be done by unraveling the defintions $$(a+_1 b)+_2(c+_1 d)=(a+_2 c)+_1(b+_2d)$$
+   \begin{theorem}
+   Suppose the set $M$ carries two composition laws $+_1$ and $+_2$ with neutral elements $e_i$. Suppose further that the commutation rule holds. Then $+_1=+_2=+$, $e_1=e_2=e$, and the composition is associative and commutative. 
+   \end{theorem}
+   The suspension induces a map $\Sigma_*:[A,Y]^0 \rightarrow [\Sigma A,\Sigma Y]^0$ mapping $[f]\mapsto [\Sigma f]$, also called the suspension. If $A=\Sigma X$, then $\Sigma _*$ is a homomorphism, because addition in $[\Sigma X, Y]^0$ is transformed by $\Sigma_*$ into $+_1$. \\ Now suppose that $X=S^{0}=\{\pm e_1\}$ with base point $e_1$. The we have the canonical homeomorphism. $$I^{n}/\partial I^{n}\cong \Sigma^n S^0$$
+   \begin{defn}
+   Let $(X,x_0)$ be pointed topological space, then the $n$-th homotopy group is: $$\pi_n(X,x_0)=[I^n/\partial I^n,X]^0=[(I^n,\partial I^n), (X,x_0)].$$ Furthermore these groups are abelian for $n\geq 2$, where we can use we can use each $n$ coordinates to define a group structure.  
+   \end{defn}
+   \subsection{Loop Space}
+   \begin{defn}
+   The \textbf{Loop Space} $\Omega Y$ of $Y$ is the subset of the path space $Y^{I}$ (with compact open topology) consisting of the loops in $Y$ with basepoint $y$. I.e.,
+   \[\Omega Y=\{w\in Y^{I}:w(0)=w(1)=y\}.\]
+   \end{defn}
+   The constant loop $k$ is the basepoint. We thus have that a pointed map $f:X\rightarrow Y$ induces a pointed map $\Omega f:\Omega X\rightarrow \Omega Y$, where $w\mapsto f\circ w$. In other words, we have a functor $\Omega:\cat{Top}^{0}\rightarrow\cat{Top}^{0}.$ This functor is compatible with homotopies, in that a pointed homotopy $H_{t}$ yields a pointed homotopy $\Omega H_{t}.$ We can also define the loop space as the space of pointed maps $F^{0}(S^{1},Y).$
+   
+   Before we proceed, we take a brief detour into mapping spaces and their arithmetic. Let $X,Y\in \cat{Top}.$ For $K\subset X$ and $U\subset Y$, we set $W(K,U)=\{f\in Y^{X}:f(K)\subset U\}.$ The \textit{compact-open} topology (CO-topology) on $Y^{X}$ is the topology which has a subbasis sets of the form $W(K,U)$ where $K$ is compact and $U$ is open. Note that a continous map $f:X\rightarrow Y$ induces continous maps $f^{Z}:X^{Z}\rightarrow Y^{Z},g\mapsto f\circ g$, and $Z^{f}:Z^{Y}\rightarrow Z^{X},g\mapsto g\circ f.$
+   \begin{prop}
+   The evaluation map $e_{X,Y}=e:Y^{X}\times X\rightarrow Y,(f,x)\mapsto f(x)$ is continuous. 
+   \end{prop}
+   \begin{proof}
+   Let $U$ be an open neighborhood of $f(x).$ Since $f$ is continuous and locally compact, there exists a compact neighborhood $K$ of $x$ such that $f(K)\subset U$. We thus have $W(K,U)\times K$ maps into $U$.
+   \end{proof}
+   \begin{defn}
+   Let $f:X\times Y\rightarrow Z$ be continuous. The \textbf{adjoint map} $f^{\wedge}:X\rightarrow Z^{Y}$ is the continuous map defined as $f^{\wedge}(x)(y)=f(x,y)$.  
+   \end{defn}
+   
+   We have thus obtained a set map $\alpha:Z^{X\times Y}\rightarrow (Z^{Y})^{X},f\mapsto f^{\wedge}$. Let $e^{Y,Z}$ be continous. Then a continuous map $\phi:X\rightarrow Z^{Y}$ induces a continous map
+   \[\phi^{\wedge}=e_{Y,Z}\circ(\phi\times id_{Y}):X\times Y\rightarrow Z^{Y}\times Y\rightarrow Z. \] We thus have another set map $\beta:(Z^{Y})^{X}\rightarrow Z^{X\times Y},\phi\mapsto\phi^{\wedge}.$ 
+   \begin{prop} Let $e_{Y,Z}$ be continuous. Then $\alpha,\beta$ are inverse bijections, so that $\phi,f$ is continous iff $\phi^{\wedge},f^{\wedge}$ is, respectively. \   
+   \end{prop}
+   \begin{cor}
+   If $H:X\times Y\times I\rightarrow Z$ is a homotopy, then $H^{\wedge}:X\times I\rightarrow Z^{Y}$ is a homotopy. Hence $[X\times Y,Z]\rightarrow[X,Z^{Y}],[f]\mapsto[f^{\wedge}]$ is well defined. If, moreover, $e_{Y,Z}$ is continuous (e.g. $Y$ locally compact), this map is bijective.
+   \end{cor}
+   We can now define a dual notion of homotopy:
+   \begin{defn}[Homotopy, 2nd]
+   We have a continuous evaluation map $e_{t}:Y^{I}\rightarrow X,w\mapsto w(t).$ Let $f_{0},f_{1}:X\rightarrow Y.$ Then, a homotopy from $f_{0}$ to $f_{1}$ is a continuous map $h:X\rightarrow Y^{I}$ such that $e_{i}\circ h=f_{i},i=1,2.$ Since $I$ is locally compact, there is a bijection between continous functions $X\times I\rightarrow Y$ and continous functions $X\rightarrow Y^{I}.$ 
+   \end{defn}
+   
+   Now, let $(X,x_{0}),(Y,y_{0})$ be pointed spaces. Denote by $F^{0}(X,Y)$ the space of pointed maps with CO$-topology$ as a subspace of $F(X,Y)$. In $F^{0}(X,Y)$ we use the constant map as the basepoint. If $f:X\times Y\rightarrow Z$ is a continuous map, recall we constructed its adjoint as $f^{\wedge}(x)(y)=f(x,y).$ In order for this map to be \textit{pointed}, we need the basepoint of $X$ to be sent to the constant map. I.e., for all $y\in Y$, we need  $f^{\wedge}(x_{0})(y)=f(x_{0},y)=z_{0}.$ Thus $x_{0}\times Y$ needs to be sent to the basepoint of $Z$. However, any morphism in $Z^{Y}$ must \textit{also} be pointed, so that we need for all $x\in X,f^{\wedge}(x)(y_{0})=f(x,y_{0})=z_{0}.$ Thus $X\times y_{0}$ must be sent to the basepoint of $Z$ as well. So, we have that $f^{\wedge}$ is a morphism of pointed spaces if and only if $f(X\times y_{0}\cup x_{0}\times Y)=z_{0}.$ Does this subspace look familiar? 
+   
+   Let $p:X\times Y\rightarrow X\wedge Y$ be the quotient map. If $g:X\wedge Y\rightarrow Z$ is given, we can form the composition of the map $g\circ p:X\times Y\rightarrow Z$, which is nothing more than a map from $X\times Y\rightarrow Z$ which sends $X\times y_{0}\cup x_{0}\times Y$ to $z_{0}.$ Let $\alpha^{0}(g)$ denote the adjoint of $g\circ p$, which is by construction an element of $F^{0}(X,F^{0}(Y,Z)).$ In this manner we obtain a set map
+   \[\alpha^{0}:F^{0}(X\wedge Y,Z)\rightarrow F^{0}(X,F^{0}(Y,Z)).\]
+   Note that the evaluation map $F^{0}(X,Y)\times X\rightarrow Y$ must factor over the quotient space $F^{0}(X,Y)\wedge X$, and so induces $e^{0}_{X,Y}:F^{0}(X,Y)\wedge X\rightarrow Y$.
+   
+   Now, let $e^{0}_{X,Y}$ be continous. Given a pointed map $\phi:X\rightarrow F^{0}(Y,Z)$, we can form $\phi^{\wedge}=\beta^{0}(\phi)=e^{0}_{X,Y}\circ(\phi\wedge \text{id}):X\wedge Y\rightarrow Z$, and hence a set map
+   \[\beta^{0}:F^{0}(X,F^{0}(Y,Z))\rightarrow F^{0}(X\wedge Y,Z). \]
+   We have a familiar proposition:
+   \begin{prop}
+   Let $e^{0}_{X,Y}$ be continuous. Then $\alpha^{0}$ and $\beta^{0}$ are inverse bijections. 
+   \end{prop}
+   \begin{cor}
+   \[[X\wedge Y,Z]^{0}\rightarrow [X,F^{0}(Y,Z)]^{0},[f]\mapsto[\alpha^{0}(f)] \] is well defined. Moreover, if $e^{0}_{X,Y}$ is continuous, then this map is bijective. 
+   \end{cor}
+   \begin{theorem}[Exponential Law] Let $X$ and $Y$ be locally compact. Then the pointed adjunction map 
+   \[\alpha^{0}:F^{0}(X\wedge Y,Z)\rightarrow F^{0}(X,F^{0}(Y,Z)) \] is a homeomorphism. A similar unpointed version holds. 
+   
+   \end{theorem}
+    Now, back to loop spaces. Recall that $\Omega Y$ is pointed with basepoint the constant map $k$.
+    \begin{prop}
+    The product of loops defines a multiplication
+    \[m:\Omega Y\times\Omega Y\rightarrow \Omega Y,(u,v)\mapsto u\ast v\] with the following properties:
+    \begin{enumerate}
+    \item $m$ is continuous
+    \item the maps $u\mapsto k\ast u$ and $u\mapsto u\ast k$ are pointed homotopic to the identity.
+    \item $m(m\times\text{id})$ and $m(\text{id}\times m)$ are pointed homotopic. 
+    \item the maps $u\mapsto u\ast\overline{u}$ and $u\mapsto \overline{u}\ast u$ are pointed homotopic to the constant map. 
+    \end{enumerate}
+    \end{prop}
+    
+    
+   \end{document}
