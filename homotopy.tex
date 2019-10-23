@@ -7,6 +7,8 @@
 \usepackage{physics}
 \usepackage{relsize}
 \usepackage{graphicx}
+\usepackage{graphicx}
+\newcommand{\invamalg}{\mathbin{\text{\rotatebox[origin=c]{180}{$\amalg$}}}}
 \usepackage{tikz-cd}
 \usepackage{tikz}
 \usepackage{mathtools}
@@ -36,6 +38,9 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\cat}{\mathbf}
+%\newcommand{\hom}{\text{hom}}
+\newcommand{\Hom}{\text{Hom}}
+
 \let\vec\mathbf
 \title{Homotopy Theory}
 \author{}
@@ -383,5 +388,66 @@ of this operation is given by the straight line homotopy $H$ described in the pi
     \end{enumerate}
     \end{prop}
     
+\section{Homotopy Limits and Colimits}
+We first describe the necessity of deriving limits and colimits. Let $I$ be a small category, and consider two diagrams $D,D':I\rightarrow \cat{Top}$. If one has a natural transformation $f:D\rightarrow D'$, then there is an induced map colim$D\rightarrow\text{colim}D'$. If $f$ is a natural weak equivalence ($D(i)\rightarrow D'(i)$ is a weak equivalence for all $i$), it does not in general follow that colim$D\rightarrow\text{colim}D'$ is a weak equivalence. 
+
+
+\section{Fibrations and Cofibrations}
+\subsection{Compactly Generated Spaces}
+    Given a map $f:X\times Y\rightarrow Z,$ we would like to topologize the set of continuous functions $C(Y,Z)$ in such a way that $f$ is continuous if and only if the adjoint \[\tilde{f}:X\rightarrow C(Y,Z), \tilde{f}(x)(y)=f(x,y)\] is continuous. For instance:
+    \begin{enumerate}
+    \item We would like an action of a topological group $G\times Z\rightarrow Z$ to correspond to a continuous function $G\rightarrow \text{Hom}_{iso}(Z,Z)$, where $\text{Hom}_{iso}$ is given the subspace topology. 
+    \item We would like a homotopy $f:I\times Y\rightarrow Z$ to correspond to a path $\tilde{f}:I\rightarrow C(Y,Z)$ of functions.
+    \item The evaluation map \[C(Y,Z)\times Y\rightarrow Z, (f,y)\mapsto f(y)\] should be continuous.
+    \end{enumerate}
     
-   \end{document}
+    Such a topology does not exist for $\cat{Top}.$ However, we can restrict to a full subcategory of spaces called "compactly generated" spaces. 
+    \begin{defn}
+    A topological space $X$ is said to be \textbf{compactly generated} if $X$ is Hausdorff and a subset $A\subset X$ is closed if and only if $A\cap C$ is closed for every compact $C\subset X.$
+    \end{defn}
+    
+    \begin{ex}
+    Examples of compactly generated spaces include:
+    \begin{enumerate}
+    \item locally compact Hausdorff spaces (e.g. manifolds)
+    \item metric spaces
+    \item CW complexes
+    \end{enumerate}
+    \end{ex}
+ $\cat{CG}$ will denote the full subcategory of compactly generated topological spaces. 
+ \subsection{Fibrations}
+ The standard example of fibrations are usually fiber bundles. I.e., fiber bundles over paracompact spaces are always fibrations. 
+    \section{Homology with Local Coefficients}
+    \section{Bundle Theory}
+    \subsection{Fiber Bundles with Structure Group}
+    Supposed $p:E\rightarrow B$ is a fiber bundle with typical fiber $F$. For each $b\in B$, $p^{-1}(b)$ is homeomorphic to the fiber, but the homeomorphism is chart dependent. Hence two charts give rise to a homeomorphism $F\cong p^{-1}(b)\cong F$. This is element of the homeomorphism group Homeo$(F)$. More precisely, given two charts $\phi:U\times F\rightarrow p^{-1}(U)$ and 
+    $\phi':U'\times F\rightarrow p^{-1}(U')$, there is a function $\theta_{\phi,\phi'}:U\cap U'\rightarrow \text{Homeo}(F)$ so that 
+    \[\phi'(b,f)=\phi(b,\theta(b)(f))\] for all $b\in U\cap U'.$
+    
+    \section{Simplicial Homotopy Theory}
+    In this section we recover classical homotopy theory in the context of simplicial sets. First, recall that a simplicial set is a functor $\Delta^{op}\rightarrow \cat{Set}$. The category $\Delta$ fully embeds in the category os simplicial sets via $[n]\mapsto \Hom([n], )$. Let $X\in\cat{sSet}$. Then, there are simplicial structure maps associated with any morphism $[n]\xrightarrow{f} [m]$, i.e., 
+    \[X[m]\xrightarrow{X[f]} X[n] \] which map the $m$-simplices to the $n$-simplices via composition with $f$. We can think of $X[m]$ as the map
+    
+    \section{Sheaf Cohomology}
+    \begin{defn}
+    Let $X$ be a topological space. A presheaf $\mathcal{F}$ of sets on $X$ consists of the following data:
+    \begin{itemize}
+    \item For every open subset $U\subset X,$ a set $\mathcal{F}(U).$ We assume $\mathcal{F}(\emptyset)$ is a set with one element. 
+    \item For every inclusion $V\subset U$, a mapping of sets $\rho_{VU}:\mathcal{F}(U)\rightarrow\mathcal{F}(V)$, called the restriction map.
+    \item We require that for a triple inclusion $W\subset V\subset U$, $\rho_{WU}=\rho_{WV}\rho_{VU}.$
+    \end{itemize}
+    \end{defn}
+    
+    \begin{defn}
+    Let $\mathcal{F}$ be a presheaf over $X$. One says $\mathcal{F}$ is a sheaf if for every open set $V$ of $X$, and every open covering $\{U_{i}\}_{i\in I}$ of $V$ and for every family $\{s_{i}\}$, where $s_{i}\in\mathcal{F}(U_{i})$, such that $\rho_{U_{i}\cap U_{j},U_{i}}(s_{i})=\rho_{U_{i}\cap U_{j},U_{j}}(s_{j})$, there exists a unique $s\in\mathcal{F}(V)$ such that $\rho_{U_{i},V}(s)=s_{i}.$
+    \end{defn}
+    
+    For a sheaf $\mathcal{F}$, we will use the notation $\Gamma(U,\mathcal{F})=\mathcal{F}(U).$
+    
+    \begin{defn}
+    Let $\mathcal{F}$ be a presheaf of sets on a space $X$, and let $x\in X.$ The stalk $\mathcal{F}_{x}$ of $\mathcal{F}$ at $x$ is the quotient of the set $\amalg_{U:x\in U}\mathcal{F}(U)$ by the following equivalence relation: $s\in\mathcal{F}(U)\sim s'\mathcal{F}(V)$ iff there exists an open set $x\in W\subset U\cap V$ such that $s$ and $s'$ have the same restriction to $W$.
+    \end{defn}
+    Elements of $\mathcal{F}_{x}$ are called germs at $x$ of sections of $\mathcal{F}$.
+    
+    
+\end{document}
