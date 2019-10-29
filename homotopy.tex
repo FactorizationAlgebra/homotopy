@@ -173,7 +173,7 @@ Given a map between two $G$-sets, $\Psi: F_1 \rightarrow F_2 $, we can make a ma
 \begin{remark}
 If $A(p)$ is an equivalence of categories, then the $G$-principle covering $p: E \rightarrow B$ over a path connected space $B$ is called \textbf{universal}.
 \end{remark}
-
+%----------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Fiber Transport}
 \begin{defn}
 A map $p: E \rightarrow B$ has the \textbf{homotopy lifting property (HLP)}  if for the space $X$ the following holds: For any  homotopy  $h: X \times I \rightarrow B$ and each map $a:X \rightarrow E$ such that $$p \circ a=h \circ i$$ where $i(x)=(x,0)$, there exists a homotopy $H: X \times I \rightarrow E$ such that $$p \circ H=h$$ $$H \circ i=a$$
@@ -216,9 +216,11 @@ $E$ is simply connected iff $\delta_{x}$ is an isomorphism. I.e., if $E$ is simp
 \end{cor}
 
 We now come to the \textit{point} of this chapter.
+%----------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Classification of Coverings}
+%----------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Coverings of Simplicial Sets}
-
+%----------------------------------------------------------------------------------------------------------------------------------------------
 \section{Elementary Homotopy Theory}
 \subsection{Mapping Cylinder}
 We first recall the definition of homotopy.
@@ -267,7 +269,7 @@ X'+Y'\arrow[r] &Z(f')
 \end{tikzcd}
 \]
 The composition of two such morphisms is homotopic to a morphism of the same type. 
-
+%----------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Suspension} We will start of with some basic definitions. Let $X\in \cat{Top}$ and $x_0\in X$. \begin{defn}
 We call the pair $(X,x_0)$ a \textbf{pointed space} with base point $x_0\in X$. A \textbf{pointed map} $f:(X,x_0)\rightarrow (Y,y_0)$ is a continous map $f:X \rightarrow Y$ that sends the base point of one space to the other ($x_0 \mapsto y_0$).
 \end{defn} 
@@ -327,6 +329,7 @@ of this operation is given by the straight line homotopy $H$ described in the pi
    \begin{defn}
    Let $(X,x_0)$ be pointed topological space, then the $n$-th homotopy group is: $$\pi_n(X,x_0)=[I^n/\partial I^n,X]^0=[(I^n,\partial I^n), (X,x_0)].$$ Furthermore these groups are abelian for $n\geq 2$, where we can use we can use each $n$ coordinates to define a group structure.  
    \end{defn}
+   %----------------------------------------------------------------------------------------------------------------------------------------------
    \subsection{Loop Space}
    \begin{defn}
    The \textbf{Loop Space} $\Omega Y$ of $Y$ is the subset of the path space $Y^{I}$ (with compact open topology) consisting of the loops in $Y$ with basepoint $y$. I.e.,
@@ -387,12 +390,13 @@ of this operation is given by the straight line homotopy $H$ described in the pi
     \item the maps $u\mapsto u\ast\overline{u}$ and $u\mapsto \overline{u}\ast u$ are pointed homotopic to the constant map. 
     \end{enumerate}
     \end{prop}
-    
+%---------------------------------------------------------------------------------------------------------------------------------------------- 
 \section{Homotopy Limits and Colimits}
 We first describe the necessity of deriving limits and colimits. Let $I$ be a small category, and consider two diagrams $D,D':I\rightarrow \cat{Top}$. If one has a natural transformation $f:D\rightarrow D'$, then there is an induced map colim$D\rightarrow\text{colim}D'$. If $f$ is a natural weak equivalence ($D(i)\rightarrow D'(i)$ is a weak equivalence for all $i$), it does not in general follow that colim$D\rightarrow\text{colim}D'$ is a weak equivalence. 
 
-
+%----------------------------------------------------------------------------------------------------------------------------------------------
 \section{Fibrations and Cofibrations}
+
 \subsection{Compactly Generated Spaces}
     Given a map $f:X\times Y\rightarrow Z,$ we would like to topologize the set of continuous functions $C(Y,Z)$ in such a way that $f$ is continuous if and only if the adjoint \[\tilde{f}:X\rightarrow C(Y,Z), \tilde{f}(x)(y)=f(x,y)\] is continuous. For instance:
     \begin{enumerate}
@@ -415,19 +419,70 @@ We first describe the necessity of deriving limits and colimits. Let $I$ be a sm
     \end{enumerate}
     \end{ex}
  $\cat{CG}$ will denote the full subcategory of compactly generated topological spaces. 
+ %----------------------------------------------------------------------------------------------------------------------------------------------
  \subsection{Fibrations}
  The standard example of fibrations are usually fiber bundles. I.e., fiber bundles over paracompact spaces are always fibrations. 
+ %----------------------------------------------------------------------------------------------------------------------------------------------
     \section{Homology with Local Coefficients}
+%----------------------------------------------------------------------------------------------------------------------------------------------
     \section{Bundle Theory}
+%----------------------------------------------------------------------------------------------------------------------------------------------
     \subsection{Fiber Bundles with Structure Group}
     Supposed $p:E\rightarrow B$ is a fiber bundle with typical fiber $F$. For each $b\in B$, $p^{-1}(b)$ is homeomorphic to the fiber, but the homeomorphism is chart dependent. Hence two charts give rise to a homeomorphism $F\cong p^{-1}(b)\cong F$. This is element of the homeomorphism group Homeo$(F)$. More precisely, given two charts $\phi:U\times F\rightarrow p^{-1}(U)$ and 
     $\phi':U'\times F\rightarrow p^{-1}(U')$, there is a function $\theta_{\phi,\phi'}:U\cap U'\rightarrow \text{Homeo}(F)$ so that 
     \[\phi'(b,f)=\phi(b,\theta(b)(f))\] for all $b\in U\cap U'.$
-    
+ %----------------------------------------------------------------------------------------------------------------------------------------------   
     \section{Simplicial Homotopy Theory}
-    In this section we recover classical homotopy theory in the context of simplicial sets. First, recall that a simplicial set is a functor $\Delta^{op}\rightarrow \cat{Set}$. The category $\Delta$ fully embeds in the category os simplicial sets via $[n]\mapsto \Hom([n], )$. Let $X\in\cat{sSet}$. Then, there are simplicial structure maps associated with any morphism $[n]\xrightarrow{f} [m]$, i.e., 
-    \[X[m]\xrightarrow{X[f]} X[n] \] which map the $m$-simplices to the $n$-simplices via composition with $f$. We can think of $X[m]$ as the map
+    \subsection{Definitions}
+    In this section we recover classical homotopy theory in the context of simplicial sets. First, recall that a simplicial set is a functor $\Delta^{op}\rightarrow \cat{Set}$. The category $\Delta$ fully embeds in the category of simplicial sets via $[n]\mapsto \Hom([n], )$. Let $X\in\cat{sSet}$. Then, there are simplicial structure maps associated with any morphism $[n]\xrightarrow{f} [m]$, i.e., 
+    \[X[m]\xrightarrow{X[f]} X[n] \] which map the $m$-simplices to the $n$-simplices via composition with $f$. We can think of $X[m]$ as assigning $[m]$ to the set of $m$-simplicies of some object constructed from simplices.
+    %----------------------------------------------------------------------------------------------------------------------------------------------
+    \subsection{Homology}
+    %----------------------------------------------------------------------------------------------------------------------------------------------
+    \subsection{Cohomology}
+    %----------------------------------------------------------------------------------------------------------------------------------------------
+    \subsection{Homotopy Theory of Simplicial Sets}
+    \begin{defn}[Kan Complex]
+    A \textbf{Kan complex} is a simplicial set $X$ such that, for any map $\Lambda^{n}_{k}\rightarrow X$, we have a lift $\Delta^{n}\rightarrow X$ such that the following diagram commutes:
+    \[
+    \begin{tikzcd}
+    \Lambda^{n}_{k}\arrow[d,"\iota"]\arrow[r] & X\\
+    \Delta^{n}\arrow[ur]
+    \end{tikzcd}.
+    \]
+    \end{defn}
+    \begin{defn}
+    Let $f:X\rightarrow Y$ be a simplicial map. $f$ is a \textbf{Kan Fibration} if for a diagram of the following form, we have a diagonal lift
+     \[
+    \begin{tikzcd}
+    \Lambda^{n}_{k}\arrow[d,"\iota"]\arrow[r,"s"] & X\arrow[d,"f"]\\
+    \Delta^{n}\arrow[ur,dotted]\arrow[r,"y"] & Y\\
+    \end{tikzcd}.
+    \]
+ Note that a Kan complex is a simplicial set such that the map to the singleton set is a Kan fibration. 
     
+    
+    \end{defn}
+    
+    To define a right adjoint for $sd:sSet\rightarrow sSet$, we begin investigating what properties one must have. The defining property of adjoints is $\text{hom}(sd(X),Y)\cong \text{hom}(X,RY)$. For $X=\Delta^{n}$, we have $\text{hom}(sd(\Delta^{n}),Y)\cong \text{hom}(\Delta^{n},RY)\cong (RY)_{n}.$ We thus define $Ex(Y)$ as the simplicial set given by $(ExY)_{n}:=\text{hom}(sd(\Delta^{n}),Y)$.
+    
+We have a natural transformation $id_{sSet}\rightarrow Ex(X)$:
+\[
+\begin{tikzcd}
+X_{m}\arrow[d]\arrow[r] & Ex(X)_{m}\arrow[d]\\
+X_{n}\arrow[r] & Ex(X)_{m}\\
+\end{tikzcd}
+\]
+where the horizontal components are induced by the adjoint maps
+\[
+\begin{tikzcd}
+sd(X_{m})\arrow[d,]\arrow[r,"LV"] & X_{m}\arrow[d]\\
+sd(X_{n})\arrow[r,"LV"] & X_{m}\\
+\end{tikzcd}
+\]
+where $LV$ is the last vertex map, mapping $sd(\Delta^{n})=C(sd(\partial\Delta^{n}))\rightarrow\Delta^{n}.$
+
+   %---------------------------------------------------------------------------------------------------------------------------------------------- 
     \section{Sheaf Cohomology}
     \begin{defn}
     Let $X$ be a topological space. A presheaf $\mathcal{F}$ of sets on $X$ consists of the following data:
