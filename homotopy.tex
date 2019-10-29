@@ -442,6 +442,22 @@ We first describe the necessity of deriving limits and colimits. Let $I$ be a sm
     \subsection{Cohomology}
     %----------------------------------------------------------------------------------------------------------------------------------------------
     \subsection{Homotopy Theory of Simplicial Sets}
+    Without further ado, we have the following definition:
+    \begin{defn}
+    Let $f,g:X\rightarrow Y$ be two simplicial maps. A \textbf{homotopy} $\eta$ from $f$ to $g$, denoted $\eta:f\implies g$ is a morphism $\eta:X\times\Delta^{1}\rightarrow Y$ such that the following diagram commutes:
+     \[
+    \begin{tikzcd}
+    X\times\Delta^{0}\arrow[d,"id\times d^{1}"']\arrow[dr,"f"]\\
+    X\times\Delta^{1}\arrow[r,"\eta"]	& Y\\
+    X\times\Delta^{0}\arrow[u,"id\times d^{0}"]\arrow[ur,"g"']\\
+    \end{tikzcd}.
+    \]
+    \end{defn}
+    
+    
+    
+    
+    
     \begin{defn}[Kan Complex]
     A \textbf{Kan complex} is a simplicial set $X$ such that, for any map $\Lambda^{n}_{k}\rightarrow X$, we have a lift $\Delta^{n}\rightarrow X$ such that the following diagram commutes:
     \[
@@ -460,8 +476,6 @@ We first describe the necessity of deriving limits and colimits. Let $I$ be a sm
     \end{tikzcd}.
     \]
  Note that a Kan complex is a simplicial set such that the map to the singleton set is a Kan fibration. 
-    
-    
     \end{defn}
     
     To define a right adjoint for $sd:sSet\rightarrow sSet$, we begin investigating what properties one must have. The defining property of adjoints is $\text{hom}(sd(X),Y)\cong \text{hom}(X,RY)$. For $X=\Delta^{n}$, we have $\text{hom}(sd(\Delta^{n}),Y)\cong \text{hom}(\Delta^{n},RY)\cong (RY)_{n}.$ We thus define $Ex(Y)$ as the simplicial set given by $(ExY)_{n}:=\text{hom}(sd(\Delta^{n}),Y)$.
@@ -480,7 +494,17 @@ sd(X_{m})\arrow[d,]\arrow[r,"LV"] & X_{m}\arrow[d]\\
 sd(X_{n})\arrow[r,"LV"] & X_{m}\\
 \end{tikzcd}
 \]
-where $LV$ is the last vertex map, mapping $sd(\Delta^{n})=C(sd(\partial\Delta^{n}))\rightarrow\Delta^{n}.$
+where $LV$ is the last vertex map, mapping $sd(\Delta^{n})=C(sd(\partial\Delta^{n}))\rightarrow\Delta^{n}.$ Concretely, we have that an $n$-simplex of $Ex(X)$ is a simplicial map $sd(\Delta^{n})\rightarrow X$. Then, the inclusion $X\xhookrightarrow{}Ex(X)$ sends an $n$-simplex of $X$, i.e. a simplicial map $\Delta^{n}\xrightarrow{\sigma} X$, to the composition
+\[sd(\Delta^{n})\rightarrow\Delta^{n}\xrightarrow{\sigma}X, \] an $n$-simplex of $Ex(X).$
+
+\begin{defn}
+Consider a diagram of the form 
+\[X\rightarrow Ex(X)\rightarrow Ex(Ex(X))\rightarrow \cdots\rightarrow Ex^{k}(X)\rightarrow\cdots. \] Then,
+\[Ex^{\infty}(X):= colim_{k\in\N}[X\rightarrow Ex(X)\rightarrow Ex(Ex(X))\rightarrow \cdots\rightarrow Ex^{k}(X)\rightarrow\cdots]. \] 
+\end{defn}
+\begin{theorem}
+For all $X\in sSet,$ we have $Ex^{\infty}(X)$ is Kan. 
+\end{theorem}
 
    %---------------------------------------------------------------------------------------------------------------------------------------------- 
     \section{Sheaf Cohomology}
