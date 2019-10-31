@@ -454,6 +454,7 @@ We first describe the necessity of deriving limits and colimits. Let $I$ be a sm
     \]
     \end{defn}
     
+    Note that the commutativity of this diagram implies that simplex-wise, $\eta(x,0)=f(x)$ and $\eta(x,1)=g(x)$ for all simplices. 
     
     
     
@@ -505,7 +506,52 @@ Consider a diagram of the form
 \begin{theorem}
 For all $X\in sSet,$ we have $Ex^{\infty}(X)$ is Kan. 
 \end{theorem}
+\begin{proof}
+To be added at a later date.
+\end{proof}
+\begin{defn}
+A simplicial map $f:X\rightarrow Y$ is a \textbf{weak equivalence} if $Ex^{\infty}(f):Ex^{\infty}(X)\rightarrow Ex^{\infty}(Y)$ is a simplicial homotopy equivalence. 
+\end{defn}
 
+In order to prove that $X\rightarrow Ex^{\infty}(X)$ is a weak equivalence, we need the simplicial whitehead theorem:
+\begin{theorem}[Simplicial Whitehead Theorem]
+Let $X,Y\in Kan$. A simplicial map $f:X\rightarrow Y$ is a simplicial homotopy equivalence if and only for all $\alpha$ and $\beta$ making the following square commute, there exists a diagonal making the upper triangle commute strictly and the lower triangle commute up to homotopy:
+\[
+\begin{tikzcd}
+\partial\Delta^{n}\arrow[d,"\iota"]\arrow[r,"\forall\alpha"] & X\arrow[d,"f"]\\
+\Delta^{n}\arrow[r,"\forall\beta"]\arrow[ur,"\exists d",dotted] & Y\\
+\end{tikzcd}.
+\]
+The homotopy $h:\Delta^{1}\times\Delta^{n}\rightarrow Y$ for the bottom triangle must be constant on $\Delta^{1}\times\partial\Delta^{n}.$
+\end{theorem}
+This means we have a homotopy $\Delta^{1}\times\Delta^{n}\rightarrow Y$ from $f\circ d$ to the bottom map whose restriction to $\Delta^{1}\times\partial\Delta^{n}$ is a constant homotopy, meaning it factors as\\ $\Delta^{1}\times\partial\Delta^{n}\rightarrow\Delta^{n}\rightarrow Y.$
+\begin{theorem}
+For any simplicial set $X$, we have $X\rightarrow Ex^{\infty}(X)$ is a weak equivalence.
+\end{theorem}
+\begin{defn}
+The derived internal hom functor $RHom:sSet^{op}\times sSet\rightarrow sSet$ is defined as 
+\[RHom(X,Y)=Hom(Ex^{\infty}(X),Ex^{\infty}(Y)).\]
+\end{defn}
+
+\subsection{How doth one goest about deriving a functor?}
+We have now encountered our first derived functor. Is there a general process for deriving functors? Indeed there is, and we investigate this in the current section. 
+
+First, what is a derived functor used for? In general, functors need not preserve weak equivalences. Indeed, we have that regular internal hom $Hom(X,Y)$ does not preserve weak equivalences, meaning that if $f:X\rightarrow Y$ is a weak equivalence, then $Hom(Z,f):Hom(Z,X)\rightarrow Hom(Z,Y)$ need not be a weak equivalence. In order to solve this problem of deriving arbitrary functors, we need the language of \textit{relative categories}.
+\begin{defn}
+A \textbf{relative category} is a category $C$ together with a subcategory $W\subset C$ with the same objects as $C$. Morphisms in $W$ are called weak equivalences. A \textbf{relative functor} $(C,W)\rightarrow (C',W')$ is a functor $F:C\rightarrow C'$ that maps $W$ to $W'$. Small relative categories and relative functors form a category $RelCat$.
+\end{defn}
+\begin{ex}
+The relative category of simplicial sets is formed by $(sSet,s.w.e.'s).$
+\end{ex}
+\begin{defn}
+Let $f:C\rightarrow D$ be a map of chain complexes. $f$ is called a \textbf{quasi-isomorphism} if $H(f):H(C)\rightarrow H(D)$ is an isomorphism of graded abelian groups. 
+\end{defn}
+\begin{ex}
+If $f:X\rightarrow Y$ is a simplicial weak equivalence, then $C(f):C(X)\rightarrow C(Y)$ is a quasi-isomorphism. Chain complexes and quasi-isomorphisms form a relative category. 
+\end{ex}
+\begin{ex}
+The derived mapping space functor $RHom(X,Y)$ for simplicial sets preserves weak equivalences. 
+\end{ex}
    %---------------------------------------------------------------------------------------------------------------------------------------------- 
     \section{Sheaf Cohomology}
     \begin{defn}
