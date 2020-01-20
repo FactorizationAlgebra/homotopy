@@ -37,9 +37,9 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
-\newcommand{\cat}{\mathbf}
 %\newcommand{\hom}{\text{hom}}
 \newcommand{\Hom}{\text{Hom}}
+\newcommand{\cat}[1]{\mathbf{#1}}
 
 \let\vec\mathbf
 \title{Homotopy Theory}
@@ -532,13 +532,14 @@ For any simplicial set $X$, we have $X\rightarrow Ex^{\infty}(X)$ is a weak equi
 The derived internal hom functor $RHom:sSet^{op}\times sSet\rightarrow sSet$ is defined as 
 \[RHom(X,Y)=Hom(Ex^{\infty}(X),Ex^{\infty}(Y)).\]
 \end{defn}
+%---------------------------------------------------------------------------------------------------------------------------------------------- 
 
 \subsection{How doth one goest about deriving a functor?}
 We have now encountered our first derived functor. Is there a general process for deriving functors? Indeed there is, and we investigate this in the current section. 
 
 First, what is a derived functor used for? In general, functors need not preserve weak equivalences. Indeed, we have that regular internal hom $Hom(X,Y)$ does not preserve weak equivalences, meaning that if $f:X\rightarrow Y$ is a weak equivalence, then $Hom(Z,f):Hom(Z,X)\rightarrow Hom(Z,Y)$ need not be a weak equivalence. In order to solve this problem of deriving arbitrary functors, we need the language of \textit{relative categories}.
 \begin{defn}
-A \textbf{relative category} is a category $C$ together with a subcategory $W\subset C$ with the same objects as $C$. Morphisms in $W$ are called weak equivalences. A \textbf{relative functor} $(C,W)\rightarrow (C',W')$ is a functor $F:C\rightarrow C'$ that maps $W$ to $W'$. Small relative categories and relative functors form a category $RelCat$.
+A \textbf{relative category} is a category $C$ together with a subcategory $W\subset C$ with the same objects as $C$. Morphisms in $W$ are called weak equivalences. A \textbf{relative functor} $(C,W)\rightarrow (C',W')$ is a functor $F:C\rightarrow C'$ that maps $W$ to $W'$. Small relative categories and relative functors form a category $\cat{RelCat}$.
 \end{defn}
 \begin{ex}
 The relative category of simplicial sets is formed by $(sSet,s.w.e.'s).$
@@ -552,7 +553,41 @@ If $f:X\rightarrow Y$ is a simplicial weak equivalence, then $C(f):C(X)\rightarr
 \begin{ex}
 The derived mapping space functor $RHom(X,Y)$ for simplicial sets preserves weak equivalences. 
 \end{ex}
-   %---------------------------------------------------------------------------------------------------------------------------------------------- 
+\begin{defn}
+In a relative category $(C,W)$, $A,B\in C$ are said to be \textbf{weakly equivalent} if there is a finite zig-zag of weak equivalences connecting $A$ and $B$: \[A=X_{0}\leftarrow X_{1}\rightarrow X_{2}\leftarrow\cdots\rightarrow X_{n}=B.\]
+\end{defn}
+
+\begin{defn}
+Suppose $(C,W_{C})$ and $(D,W_{D})$ are relative categories and $F:C\rightarrow D$ is a functor that need not preserve weak equivalences. We say that $F$ is \textbf{right derivable} if there is a full subcategory $C'\subset C$, with the inclusion functor denoted $\iota$, and a resolution functor $R:C\rightarrow C'$ that preserves weak equivalences together with a natural weak equivalence $r:id_{C}\rightarrow \iota\circ R$ such that the restriction of $F$ to $C'$ preserves weak equivalences. 
+\end{defn}
+
+If we have a relative category, we have the \textit{potential} to do homotopy theory. By that I mean, we have the notion of weak equivalence, the correct form of equivalence for doing homotopy theory. We will now build on the relative category structure with an eye towards doing homotopy theory. 
+
+\begin{defn}
+The \textbf{homotopy category } of a relative category $(C,W)$ is defined as an ordinary category $D$ equipped with a relative functor $F:(C,W)\rightarrow (D,\cat{Iso}_{D})$ such that for any other pair $(D',F')$, the category of functors $D\rightarrow D'$ making the diagram 
+\[
+\begin{tikzcd}[column sep=tiny]
+	&C\arrow[dl,"F"']\arrow[dr,"F'"]\\
+D\arrow[rr]	&	&D'
+\end{tikzcd}
+\]
+commute is equivalent to the the terminal category with one morphism. 
+\end{defn}
+
+So far, here is what we have done:
+
+\begin{itemize}
+\item define a simplicial weak equivalence;
+\item derived $Hom$ via $Ex^{\infty}$;
+\item want to see what is necessary to derive generic functors (to do so we need more tools);
+\item define relative categories (appropriate categories for doing homotopy theory) and relative functors;
+\item describe the requirements for deriving a functor between relative categories;
+\item initial description of the homotopy category of a relative category;
+\end{itemize}
+%---------------------------------------------------------------------------------------------------------------------------------------------- 
+\subsection{Homotopy Limits and Colimits}
+Let $(C,W)$ be a relative category, and let $I$ be a small category. We can put a relative category structure on the functor category $(C,W)^{I}$ as follows: a morphism in $(C,W)^{I}$ is a weak equivalence if it is a natural weak equivalence, meaning if $t:F\rightarrow G$ is a natural transformation, then $t$ is a weak equivalence in $(C,W)^{I}$ for all $i\in I$, $t(i):F(i)\rightarrow G(i)$ is in $W$. 
+%---------------------------------------------------------------------------------------------------------------------------------------------- 
     \section{Sheaf Cohomology}
     \begin{defn}
     Let $X$ be a topological space. A presheaf $\mathcal{F}$ of sets on $X$ consists of the following data:
